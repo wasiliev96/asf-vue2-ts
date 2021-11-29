@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <svg-icon icon-class="logo" class-name="logo"></svg-icon>
   </div>
 </template>
 
@@ -30,4 +31,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+
 </style>
