@@ -1,6 +1,6 @@
 <template>
   <svg :class="svgClass">
-    <use :href="iconName"/>
+    <use :href="iconHref"/>
   </svg>
 </template>
 
@@ -10,12 +10,12 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 @Component
 export default class SvgIcon extends Vue {
   @Prop({})
-  iconClass?: string
+  iconName?: string
   @Prop({})
   className?: string
 
-  get iconName(): string {
-    return `#icon-${this.iconClass}`
+  get iconHref(): string {
+    return `#icon-${this.iconName}`
   }
 
   get svgClass(): string {

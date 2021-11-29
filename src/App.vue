@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <svg-icon icon-class="logo" class-name="logo"></svg-icon>
+    <svg-icon icon-name="logo" class-name="logo"></svg-icon>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 import Vue from 'vue';
 import {getSearchId, getTickets} from "@/services/AviaSalesService";
 import {Ticket} from "./services/types";
+
 type DataType = {
   tickets: null | Ticket[]
 }
