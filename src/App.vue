@@ -104,6 +104,8 @@ export default Vue.extend({
 
 .content {
   display: flex;
+  gap: 20px;
+  justify-content: center;
   width: min(800px, 100%);
   max-width: 1200px;
   margin-inline: auto;

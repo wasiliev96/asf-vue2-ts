@@ -1,5 +1,7 @@
 <template>
   <div class="filter-bar">
+    <p class="filter-bar__title">Количество пересадок</p>
+    <!-- /.filter-bar__title -->
     <ul class="filter-list">
       <li class="filter"
       >
@@ -90,6 +92,17 @@ export default class FilterBar extends Vue {
 </script>
 
 <style lang="scss" scoped>
+
+.filter-bar {
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.filter-bar__title {
+  text-transform: uppercase;
+}
+
 .filter-list {
   padding: 0;
   list-style: none;
@@ -103,7 +116,7 @@ export default class FilterBar extends Vue {
   user-select: none;
   display: flex;
   gap: 10px;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
   cursor: pointer;
 
   &:hover {
@@ -114,7 +127,7 @@ export default class FilterBar extends Vue {
 .filter__checkbox {
   width: 20px;
   height: 20px;
-  opacity: 0.5;
+  opacity: 0.3;
   border: 1px solid var(--color-accent);
   border-radius: 2px;
   display: flex;
