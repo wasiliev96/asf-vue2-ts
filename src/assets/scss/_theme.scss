@@ -1,0 +1,13 @@
+body {
+  @media(prefers-color-scheme: light) {
+    @each $name, $hex in $theme-light {
+      --color-#{$name}: #{$hex};
+    }
+  }
+  @media(prefers-color-scheme: dark) {
+    @each $name, $hex in $theme-dark {
+      --color-#{$name}: #{$hex};
+    }
+  }
+
+}
