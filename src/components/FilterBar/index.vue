@@ -120,6 +120,7 @@ export default class FilterBar extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--color-accent);
 
   svg {
     opacity: 0;
