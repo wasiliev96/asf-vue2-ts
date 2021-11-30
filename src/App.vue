@@ -1,13 +1,7 @@
 <template>
   <div id="app">
     <svg-icon icon-name="logo" class-name="logo"></svg-icon>
-    <div v-if="tickets" class="ticket-flow">
-      <ticket-card
-          v-for="(ticket, index) in tickets"
-          :key="`ticket-card-${index}`"
-          :ticket="ticket"
-      />
-    </div>
+    <TicketList :tickets="tickets"/>
   </div>
 </template>
 
@@ -16,6 +10,7 @@ import Vue from 'vue';
 import {getSearchId, getTickets} from "@/services/AviaSalesService";
 import {Ticket} from "./services/types";
 import TicketCard from "@/components/TicketCard/index.vue";
+import TicketList from "@/components/TicketList/index.vue";
 
 type DataType = {
   tickets: null | Ticket[]
@@ -24,7 +19,7 @@ type DataType = {
 export default Vue.extend({
   name: 'App',
   components: {
-    TicketCard
+    TicketList,
   },
   data: (): DataType => ({
     tickets: null,
