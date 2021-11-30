@@ -1,7 +1,24 @@
 <template>
   <div id="app">
-    <svg-icon icon-name="logo" class-name="logo"></svg-icon>
-    <TicketList :tickets="tickets"/>
+    <div class="page">
+      <header class="page-header">
+        <svg-icon icon-name="logo" class-name="logo"></svg-icon>
+      </header>
+      <!-- /.page-header -->
+      <main class="content">
+        <aside class="content__aside">
+
+        </aside>
+        <!-- /.content-aside -->
+        <div class="content__body">
+          <RadioGroup :items="sortButtons" v-model="sortBy"/>
+          <TicketList :tickets="tickets"/>
+        </div>
+        <!-- /.content__body -->
+      </main>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.page -->
   </div>
 </template>
 
@@ -11,18 +28,39 @@ import {getSearchId, getTickets} from "@/services/AviaSalesService";
 import {Ticket} from "./services/types";
 import TicketCard from "@/components/TicketCard/index.vue";
 import TicketList from "@/components/TicketList/index.vue";
+import RadioGroup from "@/components/RadioGroup/index.vue";
+
+type sortType = 'speed' | 'cheap' | 'optimal' | null;
 
 type DataType = {
-  tickets: null | Ticket[]
+  tickets: null | Ticket[],
+  sortButtons: { title: string, value: sortType }[],
+  sortBy: sortType
 }
 
 export default Vue.extend({
   name: 'App',
   components: {
+    RadioGroup,
     TicketList,
   },
   data: (): DataType => ({
     tickets: null,
+    sortButtons: [
+      {
+        title: 'Самый быстрый',
+        value: 'speed',
+      },
+      {
+        title: 'Самый дешевый',
+        value: 'cheap'
+      },
+      {
+        title: 'Оптимальный',
+        value: 'optimal'
+      }
+    ],
+    sortBy: 'optimal'
   }),
   mounted() {
     getSearchId()
@@ -37,11 +75,26 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ticket-flow {
-  max-width: 500px;
-  margin-inline: auto;
+@import './assets/scss/mixins';
+.content {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: min(800px, 100%);
+  max-width: 1200px;
+  margin-inline: auto;
+
+  &__aside {
+    flex: 1 1 232px;
+    display: none;
+    @include tablet {
+      display: block;
+    }
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 </style>

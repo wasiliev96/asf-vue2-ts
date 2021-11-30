@@ -9,5 +9,5 @@ body {
       --color-#{$name}: #{$hex};
     }
   }
-
+  background-color: var(--color-light);
 }
