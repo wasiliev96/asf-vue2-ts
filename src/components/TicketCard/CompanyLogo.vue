@@ -43,9 +43,7 @@ export default class CompenyLogo extends Vue {
         })
         .then(res => {
           this.logoUrl = urlCreator.createObjectURL(res.data);
-          setTimeout(() => {
-            this.showedBlock = 'image';
-          }, 3000)
+          this.showedBlock = 'image';
         })
         .catch(error => console.error(error))
   }
