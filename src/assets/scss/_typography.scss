@@ -1,7 +1,27 @@
 @font-face {
   font-family: 'OpenSans';
-  src: url('../fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype-variations');
+  src: url('../fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype-variations');
 }
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px;
+}
+
 body {
   font-family: "OpenSans", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+p, span {
+  line-height: 1.5;
+  margin: 0;
 }

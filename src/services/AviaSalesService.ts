@@ -22,7 +22,9 @@ const getTickets = (searchId: string): AxiosPromise<{ tickets: Ticket[], stop: b
 }
 
 const getCompanyLogo = (iata: string): AxiosPromise<string> => {
-    return aviaSalesLogoClient.get(`${iata}.png`)
+    return aviaSalesLogoClient.get(`${iata}.png`,{
+        responseType: 'blob'
+    })
 }
 
 export {
