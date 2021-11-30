@@ -53,6 +53,7 @@ export default class RadioGroup extends Vue {
 .radio {
   flex: 1 1 auto;
   cursor: pointer;
+  user-select: none;
 
   &:not(:last-child) {
     .radio__item {
