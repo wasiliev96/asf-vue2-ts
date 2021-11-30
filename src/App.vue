@@ -7,7 +7,10 @@
       <!-- /.page-header -->
       <main class="content">
         <aside class="content__aside">
-
+          <FilterBar
+          :filters="filters"
+          v-model="selectedFilters"
+          />
         </aside>
         <!-- /.content-aside -->
         <div class="content__body">
@@ -29,18 +32,28 @@ import {Ticket} from "./services/types";
 import TicketCard from "@/components/TicketCard/index.vue";
 import TicketList from "@/components/TicketList/index.vue";
 import RadioGroup from "@/components/RadioGroup/index.vue";
+import FilterBar from "@/components/FilterBar/index.vue";
 
 type sortType = 'speed' | 'cheap' | 'optimal' | null;
 
+type FilterValue = 'all' | number;
+interface FilterType {
+  title: string,
+  value: FilterValue
+}
 type DataType = {
   tickets: null | Ticket[],
   sortButtons: { title: string, value: sortType }[],
-  sortBy: sortType
+  sortBy: sortType,
+
+  filters:FilterType[],
+  selectedFilters:FilterType[],
 }
 
 export default Vue.extend({
   name: 'App',
   components: {
+    FilterBar,
     RadioGroup,
     TicketList,
   },
@@ -60,7 +73,19 @@ export default Vue.extend({
         value: 'optimal'
       }
     ],
-    sortBy: 'optimal'
+    sortBy: 'optimal',
+
+    filters: [
+      {
+        title: '1 пересадка',
+        value: 1
+      },
+      {
+        title: '2 пересадки',
+        value: 2
+      }
+    ],
+    selectedFilters:[]
   }),
   mounted() {
     getSearchId()
@@ -76,6 +101,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import './assets/scss/mixins';
+
 .content {
   display: flex;
   width: min(800px, 100%);
