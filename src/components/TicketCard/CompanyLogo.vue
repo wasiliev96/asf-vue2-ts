@@ -38,10 +38,6 @@ export default class CompenyLogo extends Vue {
 
     getCompanyLogo(this.iata)
         .then(res => {
-          console.log(res);
-          return res;
-        })
-        .then(res => {
           this.logoUrl = urlCreator.createObjectURL(res.data);
           this.showedBlock = 'image';
         })
@@ -57,6 +53,10 @@ export default class CompenyLogo extends Vue {
 
 <style lang="scss" scoped>
 .company-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   img.hidden {
     visibility: hidden;
   }
