@@ -16,7 +16,7 @@ export default {
         state.filters = filters
     },
     [MUTATION_TYPES.SET_TICKETS]: (state: StateType, {tickets}: SetTicketsPayloadType): void => {
-        state.tickets = tickets
+        state.tickets = tickets.map(ticket => ({...ticket, id: tickets.indexOf(ticket)}))
     },
     [MUTATION_TYPES.SET_SEARCH_ID]: (state: StateType, {searchId}: { searchId: string }): void => {
         state.searchId = searchId;

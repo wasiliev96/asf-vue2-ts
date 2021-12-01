@@ -97,13 +97,6 @@ export default class App extends Vue {
 
   mounted() {
     this.$store.dispatch(ACTION_TYPES.LOAD_TICKETS);
-    // getSearchId()
-    //     .then(res => res.data)
-    //     .then(data => data.searchId)
-    //     .then(getTickets)
-    //     .then(res => res.data)
-    //     .then(data => this.tickets = data.tickets)
-    //     .catch(error => console.error(error))
   }
 }
 </script>
