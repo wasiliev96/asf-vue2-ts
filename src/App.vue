@@ -6,7 +6,7 @@
         <aside class="content__aside">
           <FilterBar
               :filters="filters"
-              v-model="selectedFilters"
+              v-model="stopsFilter"
           />
         </aside>
         <!-- /.content-aside -->
@@ -23,7 +23,6 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import {getSearchId, getTickets} from "@/services/AviaSalesService";
 import {Ticket} from "./services/types";
 import TicketCard from "@/components/TicketCard/index.vue";
@@ -31,26 +30,25 @@ import TicketList from "@/components/TicketList/index.vue";
 import RadioGroup from "@/components/RadioGroup/index.vue";
 import FilterBar from "@/components/FilterBar/index.vue";
 import PageHeader from "@/components/PageHeader/index.vue";
+import {Component, Watch, Vue} from "vue-property-decorator";
+import {ACTION_TYPES, GETTER_TYPES} from "@/store/types";
 
-type sortType = 'speed' | 'cheap' | 'optimal' | null;
+enum SORT_TYPE {
+  speed = 'speed',
+  cheap = 'cheap',
+  optimal = 'optimal'
+}
 
-type FilterValue = 'all' | number;
+type SortType = SORT_TYPE.optimal | SORT_TYPE.cheap | SORT_TYPE.speed | null;
 
 interface FilterType {
   title: string,
-  value: FilterValue
+  value: number,
+  active: boolean
 }
 
-type DataType = {
-  tickets: null | Ticket[],
-  sortButtons: { title: string, value: sortType }[],
-  sortBy: sortType,
-
-  filters: FilterType[],
-  selectedFilters: FilterType[],
-}
-
-export default Vue.extend({
+type SortButtons = { title: string, value: SortType }[]
+@Component({
   name: 'App',
   components: {
     PageHeader,
@@ -58,46 +56,80 @@ export default Vue.extend({
     RadioGroup,
     TicketList,
   },
-  data: (): DataType => ({
-    tickets: null,
-    sortButtons: [
-      {
-        title: 'Самый быстрый',
-        value: 'speed',
-      },
-      {
-        title: 'Самый дешевый',
-        value: 'cheap'
-      },
-      {
-        title: 'Оптимальный',
-        value: 'optimal'
-      }
-    ],
-    sortBy: 'optimal',
+})
+export default class App extends Vue {
 
-    filters: [
-      {
-        title: '1 пересадка',
-        value: 1
-      },
-      {
-        title: '2 пересадки',
-        value: 2
-      }
-    ],
-    selectedFilters: []
-  }),
-  mounted() {
-    getSearchId()
-        .then(res => res.data)
-        .then(data => data.searchId)
-        .then(getTickets)
-        .then(res => res.data)
-        .then(data => this.tickets = data.tickets)
-        .catch(error => console.error(error))
+  sortButtons: SortButtons = [
+    {
+      title: 'Самый быстрый',
+      value: SORT_TYPE.speed,
+    },
+    {
+      title: 'Самый дешевый',
+      value: SORT_TYPE.cheap
+    },
+    {
+      title: 'Оптимальный',
+      value: SORT_TYPE.optimal
+    }
+  ]
+
+  sortBy: SortType = SORT_TYPE.optimal
+
+  filters: FilterType[] = [
+    {
+      title: '1 пересадка',
+      value: 1,
+      active: false,
+    },
+    {
+      title: '2 пересадки',
+      value: 2,
+      active: false,
+    }
+  ]
+  stopsFilter = this.filters.filter(filter=>filter.active).map(filter=>filter.value);
+
+  get tickets(): Ticket[] | undefined {
+    if (this.stopsFilter.length) {
+      return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter);
+    }
+    return this.$store.state.tickets;
   }
-});
+
+  @Watch('sortBy')
+  onSortByChange(value: SortType): void {
+    this.sortTickets(value);
+  }
+
+  sortTickets(sortType: SortType): void {
+    let param = null;
+    switch (sortType) {
+      case SORT_TYPE.optimal:
+        console.log('optimal')
+        break;
+      case SORT_TYPE.cheap:
+        console.log('cheap')
+        break;
+      case SORT_TYPE.speed:
+        console.log('speed');
+        break;
+      default:
+        console.log('all');
+    }
+  }
+
+  mounted() {
+    this.$store.dispatch(ACTION_TYPES.LOAD_TICKETS);
+    // getSearchId()
+    //     .then(res => res.data)
+    //     .then(data => data.searchId)
+    //     .then(getTickets)
+    //     .then(res => res.data)
+    //     .then(data => this.tickets = data.tickets)
+    //     .catch(error => console.error(error))
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -5,11 +5,12 @@
     <ul class="filter-list">
       <li class="filter"
       >
-        <label class="filter__label" @mousedown="toggleSelectAll">
-          <input class="filter__input" type="checkbox"/>
+        <label class="filter__label">
+          <input class="filter__input" type="checkbox" @change="toggleAllSelected()"
+                 v-model="allSelectedCheckboxChecked"/>
           <div class="filter__item">
             <div class="filter__checkbox"
-                 :class="{'checked':allSelected}"
+                 :class="{'checked':allSelectedCheckboxChecked}"
             >
               <svg-icon icon-name="check" class-name="logo"/>
             </div>
@@ -26,9 +27,9 @@
           :key="`filter-index-${index}`"
       >
         <label class="filter__label">
-          <input class="filter__input" type="checkbox" :value="filter" v-model="filterValue"/>
+          <input class="filter__input" type="checkbox" :value="filter.value" v-model="filterValue"/>
           <div class="filter__item">
-            <div class="filter__checkbox" :class="{'checked':filterValue.find(item=>item.value===filter.value)}">
+            <div class="filter__checkbox" :class="{'checked':!!filterValue.includes(filter.value)}">
               <svg-icon icon-name="check" class-name="logo"/>
             </div>
             <!-- /.filter__checkbox -->
@@ -46,15 +47,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue, Watch} from "vue-property-decorator";
 import SvgIcon from "@/components/SvgIcon/index.vue";
+import {FilterType} from "@/store/types";
 
-type FilterValue = 'all' | number;
-
-interface FilterType {
-  title: string,
-  value: FilterValue
-}
 
 @Component({
   name: 'FilterBar',
@@ -67,25 +63,30 @@ export default class FilterBar extends Vue {
   filters!: FilterType[]
 
   @Prop({required: true})
-  value!: FilterType[]
+  value!: number[]
 
   allSelected = false
+  allSelectedCheckboxChecked = false
 
-  get filterValue() {
+  get filterValue(): number[] {
     return this.value
   }
 
-  set filterValue(value) {
+  set filterValue(value: number[]) {
+    if (value.length === this.filters.length) {
+      this.allSelectedCheckboxChecked = true;
+    }
+    if (value.length <= this.filters.length - 1) {
+      this.allSelectedCheckboxChecked = false;
+    }
     this.$emit('input', value);
   }
 
-  toggleSelectAll() {
-    if (this.allSelected) {
-      this.filterValue = [];
-      this.allSelected = false;
+  toggleAllSelected(): void {
+    if (this.allSelectedCheckboxChecked) {
+      this.filterValue = this.filters.map(filter => filter.value);
     } else {
-      this.filterValue = this.filters;
-      this.allSelected = true;
+      this.filterValue = this.filters.filter((filter: FilterType) => filter.active).map(filter => filter.value);
     }
   }
 }
