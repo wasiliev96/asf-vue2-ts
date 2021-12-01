@@ -88,36 +88,11 @@ export default class App extends Vue {
       active: false,
     }
   ]
-  stopsFilter = this.filters.filter(filter=>filter.active).map(filter=>filter.value);
+  stopsFilter = this.filters.filter(filter => filter.active).map(filter => filter.value);
 
 
   get tickets(): Ticket[] | undefined {
-    if (this.stopsFilter.length) {
-      return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter);
-    }
-    return this.$store.state.tickets;
-  }
-
-  @Watch('sortBy')
-  onSortByChange(value: SortType): void {
-    this.sortTickets(value);
-  }
-
-  sortTickets(sortType: SortType): void {
-    let param = null;
-    switch (sortType) {
-      case SORT_TYPE.optimal:
-        console.log('optimal')
-        break;
-      case SORT_TYPE.cheap:
-        console.log('cheap')
-        break;
-      case SORT_TYPE.speed:
-        console.log('speed');
-        break;
-      default:
-        console.log('all');
-    }
+    return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter, this.sortBy);
   }
 
   mounted() {
