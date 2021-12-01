@@ -70,6 +70,7 @@ export default class RadioGroup extends Vue {
   padding: 15px;
   font-size: 12px;
   text-align: center;
+  text-transform: uppercase;
 
   &.active {
     background-color: var(--color-accent);

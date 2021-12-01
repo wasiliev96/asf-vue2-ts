@@ -1,15 +1,12 @@
 <template>
   <div id="app">
     <div class="page">
-      <header class="page-header">
-        <svg-icon icon-name="logo" class-name="logo"></svg-icon>
-      </header>
-      <!-- /.page-header -->
+      <PageHeader/>
       <main class="content">
         <aside class="content__aside">
           <FilterBar
-          :filters="filters"
-          v-model="selectedFilters"
+              :filters="filters"
+              v-model="selectedFilters"
           />
         </aside>
         <!-- /.content-aside -->
@@ -33,26 +30,30 @@ import TicketCard from "@/components/TicketCard/index.vue";
 import TicketList from "@/components/TicketList/index.vue";
 import RadioGroup from "@/components/RadioGroup/index.vue";
 import FilterBar from "@/components/FilterBar/index.vue";
+import PageHeader from "@/components/PageHeader/index.vue";
 
 type sortType = 'speed' | 'cheap' | 'optimal' | null;
 
 type FilterValue = 'all' | number;
+
 interface FilterType {
   title: string,
   value: FilterValue
 }
+
 type DataType = {
   tickets: null | Ticket[],
   sortButtons: { title: string, value: sortType }[],
   sortBy: sortType,
 
-  filters:FilterType[],
-  selectedFilters:FilterType[],
+  filters: FilterType[],
+  selectedFilters: FilterType[],
 }
 
 export default Vue.extend({
   name: 'App',
   components: {
+    PageHeader,
     FilterBar,
     RadioGroup,
     TicketList,
@@ -85,7 +86,7 @@ export default Vue.extend({
         value: 2
       }
     ],
-    selectedFilters:[]
+    selectedFilters: []
   }),
   mounted() {
     getSearchId()
@@ -109,13 +110,13 @@ export default Vue.extend({
   width: min(800px, 100%);
   max-width: 1200px;
   margin-inline: auto;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+  }
 
   &__aside {
     flex: 1 1 232px;
-    display: none;
-    @include tablet {
-      display: block;
-    }
   }
 
   &__body {
