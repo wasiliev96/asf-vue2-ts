@@ -1,5 +1,5 @@
 <template>
-  <div class="ticket-flow">
+  <div class="ticket-list">
     <ticket-card
         v-for="(ticket, index) in tickets"
         :key="`ticket-card-${index}`"
@@ -26,5 +26,8 @@ export default class TicketList extends Vue {
 </script>
 
 <style scoped>
-
+.ticket-list{
+  max-height: 100vh;
+  overflow-y: auto;
+}
 </style>
