@@ -94,13 +94,14 @@ export default class FilterBar extends Vue {
 <style lang="scss" scoped>
 
 .filter-bar {
-  padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: var(--color-white);
+  padding-block: 20px;
 }
 
 .filter-bar__title {
+  padding-inline: 20px;
   text-transform: uppercase;
 }
 
@@ -117,7 +118,7 @@ export default class FilterBar extends Vue {
   user-select: none;
   display: flex;
   gap: 10px;
-  padding: 10px 10px 10px 0;
+  padding: 10px 10px 10px 20px;
   cursor: pointer;
 
   &:hover {
