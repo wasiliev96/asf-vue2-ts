@@ -97,6 +97,7 @@ export default class FilterBar extends Vue {
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  background-color: var(--color-white);
 }
 
 .filter-bar__title {

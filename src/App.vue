@@ -112,8 +112,11 @@ export default class App extends Vue {
   max-width: 1200px;
   margin-inline: auto;
   flex-direction: column;
+  padding-inline: 32px;
+
   @include tablet {
     flex-direction: row;
+    padding-inline: 0;
   }
 
   &__aside {
@@ -124,7 +127,6 @@ export default class App extends Vue {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
 }
 </style>
