@@ -65,7 +65,6 @@ export default class FilterBar extends Vue {
   @Prop({required: true})
   value!: number[]
 
-  allSelected = false
   allSelectedCheckboxChecked = false
 
   get filterValue(): number[] {

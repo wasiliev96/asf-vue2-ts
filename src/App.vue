@@ -90,6 +90,7 @@ export default class App extends Vue {
   ]
   stopsFilter = this.filters.filter(filter=>filter.active).map(filter=>filter.value);
 
+
   get tickets(): Ticket[] | undefined {
     if (this.stopsFilter.length) {
       return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter);
