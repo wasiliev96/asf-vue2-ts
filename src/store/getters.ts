@@ -23,7 +23,6 @@ const sortedTickets = (tickets: Ticket[], sortBy: SortType): Ticket[] => {
                 return -1;
         }
     }
-    console.log(tickets.sort(compare)[0]);
     return tickets.sort(compare);
 }
 

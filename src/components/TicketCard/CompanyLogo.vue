@@ -12,7 +12,7 @@
           key="image"
       >
       <div v-if="showedBlock==='placeholder'" class="placeholder" key="placeholder">
-        <p>...</p>
+        <p v-text="iata"/>
       </div>
       <!-- /.placeholder -->
     </transition>
@@ -67,6 +67,7 @@ export default class CompenyLogo extends Vue {
     justify-content: center;
     width: 99px;
     height: 36px;
+    text-align: center;
   }
 }
 
