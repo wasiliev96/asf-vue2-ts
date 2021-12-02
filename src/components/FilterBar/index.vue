@@ -49,7 +49,7 @@
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator";
 import SvgIcon from "@/components/SvgIcon/index.vue";
-import {FilterType} from "@/store/types";
+import {FilterType} from "@/types";
 
 
 @Component({

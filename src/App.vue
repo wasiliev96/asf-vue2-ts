@@ -30,7 +30,7 @@ import FilterBar from "@/components/FilterBar/index.vue";
 import PageHeader from "@/components/PageHeader/index.vue";
 import {Component, Vue, Watch} from "vue-property-decorator";
 import {ACTION_TYPES, GETTER_TYPES, LOAD_STATUS} from "@/store/types";
-import {FilterType, SORT_TYPE, SortType} from "@/types";
+import {FilterType, SORT_TYPE, SortType} from "./types";
 
 type SortButtons = { title: string, value: SortType }[]
 

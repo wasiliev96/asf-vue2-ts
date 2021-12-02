@@ -6,14 +6,18 @@ export enum SORT_TYPE {
 
 export type SortType = SORT_TYPE.optimal | SORT_TYPE.cheap | SORT_TYPE.speed | null;
 
-interface FilterType {
+export interface FilterType {
     title: string,
     value: number,
     active: boolean
 }
 
+
+export type SortButtons = { title: string, value: SortType }[]
+
+
 // Radio select
-export interface SelectType{
+export interface SelectType {
     title: string,
     value: string
 }

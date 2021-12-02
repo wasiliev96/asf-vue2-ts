@@ -1,5 +1,6 @@
-import {GETTER_TYPES, SORT_TYPE, SortType, StateType, Ticket} from "@/store/types";
+import {GETTER_TYPES, StateType, Ticket} from "@/store/types";
 import {compareAsc, parseISO} from 'date-fns';
+import {SORT_TYPE, SortType} from "@/types";
 
 const sortedTickets = (tickets: Ticket[], sortBy: SortType): Ticket[] => {
     const ticketOverallTime = (ticket: Ticket) => {
