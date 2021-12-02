@@ -10,8 +10,6 @@ export type LoadStatus = LOAD_STATUS.REJECT | LOAD_STATUS.RESOLVE | LOAD_STATUS.
 
 export interface StateType {
     tickets: Ticket[],
-    filters: FilterType[],
-    sortType: null | SortType,
     searchId: string,
 
     loading: {
@@ -22,8 +20,6 @@ export interface StateType {
 
 const state: StateType = {
     tickets: [],
-    filters: [],
-    sortType: SORT_TYPE.optimal,
     searchId: '',
     loading: {
         status: LOAD_STATUS.PENDING,

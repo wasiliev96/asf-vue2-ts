@@ -11,7 +11,6 @@ export default {
 
     [ACTION_TYPES.LOAD_SEARCH_ID]: async (
         {
-            state,
             commit
         }: { state: StateType, commit: (mutationName: string, payload: any) => void }):Promise<void> => {
         const searchId = await getSearchId()
