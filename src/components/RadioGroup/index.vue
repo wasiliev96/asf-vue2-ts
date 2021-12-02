@@ -67,7 +67,11 @@ export default class RadioGroup extends Vue {
 }
 
 .radio__item {
-  padding: 15px;
+  height: 100%;
+  padding: 15px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 12px;
   text-align: center;
   text-transform: uppercase;
