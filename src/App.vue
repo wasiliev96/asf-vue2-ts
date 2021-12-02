@@ -23,15 +23,14 @@
 </template>
 
 <script lang="ts">
-import {getSearchId, getTickets} from "@/services/AviaSalesService";
 import {Ticket} from "./services/types";
-import TicketCard from "@/components/TicketCard/index.vue";
 import TicketList from "@/components/TicketList/index.vue";
 import RadioGroup from "@/components/RadioGroup/index.vue";
 import FilterBar from "@/components/FilterBar/index.vue";
 import PageHeader from "@/components/PageHeader/index.vue";
-import {Component, Watch, Vue} from "vue-property-decorator";
+import {Component, Vue, Watch} from "vue-property-decorator";
 import {ACTION_TYPES, GETTER_TYPES} from "@/store/types";
+import {LOAD_STATUS} from "@/store/state";
 
 enum SORT_TYPE {
   speed = 'speed',
@@ -93,6 +92,25 @@ export default class App extends Vue {
 
   get tickets(): Ticket[] | undefined {
     return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter, this.sortBy);
+  }
+
+  get ticketLoadingError() {
+    return this.$store.state.loading.status === LOAD_STATUS.REJECT
+  }
+
+  @Watch('ticketLoadingError')
+  responseErrorHandler(isError: boolean): void {
+    if (isError) {
+      this.$toasted.show('Упс... Что-то пошло не так. Перезагрузите страницу', {
+        type: 'error',
+        fullWidth: true,
+        duration: 5000,
+        onComplete: () => {
+          console.log('completed')
+          location.reload()
+        }
+      })
+    }
   }
 
   mounted() {

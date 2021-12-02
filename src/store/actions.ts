@@ -12,7 +12,7 @@ export default {
     [ACTION_TYPES.LOAD_SEARCH_ID]: async (
         {
             commit
-        }: { state: StateType, commit: (mutationName: string, payload: any) => void }):Promise<void> => {
+        }: { state: StateType, commit: (mutationName: string, payload: any) => void }): Promise<void> => {
         const searchId = await getSearchId()
             .then(res => res.data.searchId);
         if (!searchId.length) {
@@ -28,7 +28,7 @@ export default {
             commit(MUTATION_TYPES.SET_LOAD_STATUS, {status: LOAD_STATUS.PENDING});
 
             if (!state.searchId) {
-              await dispatch(ACTION_TYPES.LOAD_SEARCH_ID)
+                await dispatch(ACTION_TYPES.LOAD_SEARCH_ID)
             }
 
             const {tickets} = await getTickets(state.searchId)
@@ -42,7 +42,7 @@ export default {
         } catch
             (error) {
             console.error(error)
-            commit(MUTATION_TYPES.SET_LOAD_STATUS, {status: LOAD_STATUS.REJECT});
+            commit(MUTATION_TYPES.SET_LOAD_STATUS, {status: LOAD_STATUS.REJECT, response: error});
         }
     }
 }
