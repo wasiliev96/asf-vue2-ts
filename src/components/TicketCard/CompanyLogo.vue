@@ -1,6 +1,8 @@
 <template>
   <div class="company-logo">
+
     <transition name="fade" mode="out-in">
+
       <img
           loading="lazy"
           height="36"
@@ -11,13 +13,14 @@
           v-if="showedBlock === 'image'"
           key="image"
       >
+
       <div v-if="showedBlock==='placeholder'" class="placeholder" key="placeholder">
         <p v-text="iata"/>
       </div>
-      <!-- /.placeholder -->
+
     </transition>
+
   </div>
-  <!-- /.company-logo -->
 </template>
 
 <script lang="ts">

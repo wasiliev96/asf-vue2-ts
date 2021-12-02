@@ -3,6 +3,7 @@
     <svg-icon icon-name="logo" class-name="logo"></svg-icon>
   </header>
 </template>
+
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
 import SvgIcon from "@/components/SvgIcon/index.vue";

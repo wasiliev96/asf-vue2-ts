@@ -1,8 +1,10 @@
 <template>
   <div class="ticket-list-wrapper">
+
     <div class="ticket-list"
          v-if="renderedTickets.length"
     >
+
       <DynamicScroller
           ref="scroller"
           :items="renderedTickets"
@@ -24,7 +26,9 @@
 
         </template>
       </DynamicScroller>
+
       <VButton
+          :primary="true"
           class="show-more"
           v-if="isMoreButtonShown"
           @click.native="increaseLimit">Показать еще 5!
@@ -34,9 +38,7 @@
     <div v-else class="placeholder">
       <p>Sorry, no tickets here...</p>
     </div>
-    <!-- /.placeholder -->
   </div>
-  <!-- /.ticket-list-wrapper -->
 </template>
 
 <script lang="ts">

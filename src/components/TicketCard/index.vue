@@ -1,45 +1,42 @@
 <template>
   <div class="card ticket-card">
+
     <div class="card__header">
       <h1 class="card__title" v-text="formatCurrencyString(ticket.price)"/>
       <CompanyLogo :iata="ticket.carrier"/>
     </div>
-    <!-- /.card__header -->
+
     <div class="card__body">
+
       <table class="table card__table">
+
         <tr class="table__row"
             v-for="(segment, index) in ticket.segments"
             :key="`segment-${index}-${segment.date}`"
         >
+
           <td class="table__cell cell">
             <p class="cell-caption">{{ segment.origin }} – {{ segment.destination }}</p>
-            <!-- /.cell__caption -->
             <p class="cell-value">{{ timeIntervalString(segment.date, segment.duration) }}</p>
-            <!-- /.cell-value -->
           </td>
-          <!-- /.table-cell -->
+
           <td class="table__cell cell">
             <p class="cell-caption">В пути</p>
-            <!-- /.cell__caption -->
             <p class="cell-value">{{ durationString(segment.duration) }}</p>
-            <!-- /.cell-value -->
           </td>
-          <!-- /.table-cell -->
+
           <td class="table__cell cell">
             <p class="cell-caption">{{ segment.stops.length }} {{ stopsCountString(segment.stops.length) }}</p>
-            <!-- /.cell__caption -->
             <p class="cell-value">{{ segment.stops.join(',') }}</p>
-            <!-- /.cell-value -->
           </td>
-          <!-- /.table-cell -->
+
         </tr>
-        <!-- /.table__row -->
+
       </table>
-      <!-- /.card__table -->
+
     </div>
-    <!-- /.card-body -->
+
   </div>
-  <!-- /.ticket-card -->
 </template>
 
 <script lang="ts">

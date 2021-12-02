@@ -2,23 +2,24 @@
   <div id="app">
     <div class="page">
       <PageHeader/>
+
       <main class="content">
+
         <aside class="content__aside">
           <FilterBar
               :filters="filters"
               v-model="stopsFilter"
           />
         </aside>
-        <!-- /.content-aside -->
+
         <div class="content__body">
           <RadioGroup :items="sortButtons" v-model="sortBy"/>
           <TicketList :tickets="tickets"/>
         </div>
-        <!-- /.content__body -->
+
       </main>
-      <!-- /.page-content -->
+
     </div>
-    <!-- /.page -->
   </div>
 </template>
 
@@ -75,6 +76,7 @@ export default class App extends Vue {
       active: false,
     }
   ]
+
   stopsFilter = this.filters.filter(filter => filter.active).map(filter => filter.value);
 
 

@@ -1,8 +1,10 @@
 <template>
   <div class="filter-bar">
+
     <p class="filter-bar__title">Количество пересадок</p>
-    <!-- /.filter-bar__title -->
+
     <ul class="filter-list">
+      <!--       Select all item-->
       <li class="filter"
       >
         <label class="filter__label">
@@ -21,29 +23,30 @@
           <!-- /.filter__item -->
         </label>
       </li>
-      <!-- /.filter-item -->
+      <!--/Select all item-->
+
       <li class="filter"
           v-for="(filter, index) in filters"
           :key="`filter-index-${index}`"
       >
+
         <label class="filter__label">
           <input class="filter__input" type="checkbox" :value="filter.value" v-model="filterValue"/>
+
           <div class="filter__item">
             <div class="filter__checkbox" :class="{'checked':!!filterValue.includes(filter.value)}">
               <svg-icon icon-name="check" class-name="logo"/>
             </div>
-            <!-- /.filter__checkbox -->
             <p class="filter-item__text" v-text="filter.title"></p>
-            <!-- /.filter-item__text -->
           </div>
-          <!-- /.filter__item -->
+
         </label>
+
       </li>
-      <!-- /.filter-item -->
+
+
     </ul>
-    <!-- /.filter-list -->
   </div>
-  <!-- /.filterbar -->
 </template>
 
 <script lang="ts">

@@ -3,9 +3,11 @@ import {compareAsc, parseISO} from 'date-fns';
 import {SORT_TYPE, SortType} from "@/types";
 
 const sortedTickets = (tickets: Ticket[], sortBy: SortType): Ticket[] => {
+
     const ticketOverallTime = (ticket: Ticket) => {
         return ticket.segments.reduce((time, segment) => time + segment.duration, 0);
     }
+
     const compare = (ticket1: Ticket, ticket2: Ticket) => {
         switch (sortBy) {
 
@@ -23,14 +25,11 @@ const sortedTickets = (tickets: Ticket[], sortBy: SortType): Ticket[] => {
                 return -1;
         }
     }
+
     return tickets.sort(compare);
 }
 
 export default {
-    // [GETTER_TYPES.SELECTED_FILTERS]: (state: StateType): FilterType[] | undefined => {
-    //     return state.filters?.filter((filter: FilterType) => filter.active)
-    // },
-
     [GETTER_TYPES.FILTERED_TICKETS]: (state: StateType) => (stopsArray: number[], sortBy: SortType): Ticket[] | undefined => {
         let filteredTickets;
         if (stopsArray.length > 0) {

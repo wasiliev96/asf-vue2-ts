@@ -1,5 +1,5 @@
 <template>
-  <button :class="['btn', primary && 'btn-primary']">
+  <button class="btn" :class="{'btn-primary':primary}">
     <slot/>
   </button>
 </template>
@@ -11,6 +11,10 @@ import {Component, Prop, Vue} from "vue-property-decorator";
 export default class VButton extends Vue {
   @Prop({required: false, default: false})
   primary?: boolean
+
+  mounted() {
+    console.log(this.primary);
+  }
 }
 </script>
 
@@ -22,6 +26,10 @@ export default class VButton extends Vue {
   border: none;
   border-radius: 5px;
   padding: 15px 20px;
+  color: var(--color-text);
+}
+
+.btn-primary {
   background-color: var(--color-accent);
   color: var(--color-white);
 }

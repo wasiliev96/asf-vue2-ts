@@ -1,5 +1,6 @@
 <template>
   <div class="radio-group">
+
     <label class="radio" v-for="(item, index) in items" :key="`${item.title}${index}`">
       <input class="radio__input" type="radio" :value="item.value" v-model="groupValue"/>
       <div class="radio__item"
@@ -7,10 +8,9 @@
       >
         {{ item.title }}
       </div>
-      <!-- /.radio -->
     </label>
+
   </div>
-  <!-- /.button-group -->
 </template>
 
 <script lang="ts">

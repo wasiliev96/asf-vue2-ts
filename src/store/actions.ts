@@ -8,18 +8,16 @@ type LoadTicketsPayloadType = {
 }
 export default {
 
-    [ACTION_TYPES.LOAD_SEARCH_ID]: async (
-        {
-            commit
-        }: { state: StateType, commit: (mutationName: string, payload: any) => void }): Promise<void> => {
+    [ACTION_TYPES.LOAD_SEARCH_ID]: async ({commit}: { state: StateType, commit: (mutationName: string, payload: any) => void }): Promise<void> => {
         const searchId = await getSearchId()
             .then(res => res.data.searchId);
+
         if (!searchId.length) {
             commit(MUTATION_TYPES.SET_LOAD_STATUS, {status: LOAD_STATUS.REJECT});
         }
+
         commit(MUTATION_TYPES.SET_SEARCH_ID, {searchId})
     },
-
 
     [ACTION_TYPES.LOAD_TICKETS]: async ({commit, state, dispatch}: LoadTicketsPayloadType): Promise<void> => {
         console.log('loading tickets...');
