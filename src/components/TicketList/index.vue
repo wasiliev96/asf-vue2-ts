@@ -1,6 +1,8 @@
 <template>
   <div class="ticket-list-wrapper">
-    <div class="ticket-list">
+    <div class="ticket-list"
+         v-if="renderedTickets.length"
+    >
       <DynamicScroller
           ref="scroller"
           :items="renderedTickets"
@@ -27,6 +29,11 @@
           @click.native="increaseLimit">Показать еще 5!
       </VButton>
     </div>
+
+    <div v-else class="placeholder">
+      <p>Sorry, no tickets here...</p>
+    </div>
+    <!-- /.placeholder -->
   </div>
   <!-- /.ticket-list-wrapper -->
 </template>
@@ -81,5 +88,10 @@ export default class TicketList extends Vue {
 .ticket-list {
   max-height: 70vh;
   overflow-y: auto;
+}
+
+.placeholder {
+  padding: 25px;
+  text-align: center;
 }
 </style>
