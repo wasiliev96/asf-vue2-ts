@@ -82,7 +82,7 @@ export default class TicketCard extends Vue {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: var(--color-white);
-  margin-block: 10px;
+  margin-bottom: 10px;
 }
 
 .card__header {

@@ -25,6 +25,7 @@
         </template>
       </DynamicScroller>
       <VButton
+          class="show-more"
           v-if="isMoreButtonShown"
           @click.native="increaseLimit">Показать еще 5!
       </VButton>
@@ -87,10 +88,14 @@ export default class TicketList extends Vue {
 .ticket-list {
   max-height: 70vh;
   overflow-y: auto;
+  margin-top: 10px;
 }
 
 .placeholder {
   padding: 25px;
   text-align: center;
+}
+.show-more{
+  margin-bottom: 15px;
 }
 </style>
