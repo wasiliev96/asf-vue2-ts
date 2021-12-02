@@ -1,37 +1,48 @@
 <template>
-  <div class="ticket-list">
-    <DynamicScroller
-        :items="tickets"
-        :min-item-size="54"
-        class="scroller"
-    >
-      <template v-slot="{ item, index }">
-        <DynamicScrollerItem
-            :item="item"
-            :active="!!index"
-            :data-index="index"
-        >
-          <ticket-card
-              :key="index"
-              :ticket="item"
-          />
-        </DynamicScrollerItem>
-      </template>
-    </DynamicScroller>
+  <div class="ticket-list-wrapper">
+    <div class="ticket-list">
+      <DynamicScroller
+          ref="scroller"
+          :items="renderedTickets"
+          :item-size="222"
+          :to-bottom="increaseLimit"
+          :min-item-size="54"
+          class="scroller"
+      >
+        <template v-slot="{ item, index, active }">
+          <DynamicScrollerItem
+              :item='item'
+              :active='active'
+              :data-index='index'
+          >
+            <ticket-card
+                :ticket="item"
+            />
+          </DynamicScrollerItem>
 
+        </template>
+      </DynamicScroller>
+      <VButton
+          v-if="isMoreButtonShown"
+          @click.native="increaseLimit">Показать еще 5!
+      </VButton>
+    </div>
   </div>
+  <!-- /.ticket-list-wrapper -->
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import {Ticket} from "@/services/types";
 import TicketCard from "@/components/TicketCard/index.vue";
+import VButton from '@/components/VButton/index.vue';
 import {DynamicScroller, DynamicScrollerItem} from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 @Component({
   name: 'TicketList',
   components: {
+    VButton,
     TicketCard,
     DynamicScroller,
     DynamicScrollerItem
@@ -40,12 +51,35 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 export default class TicketList extends Vue {
   @Prop({required: true})
   tickets!: Ticket[]
+
+  get renderedTickets() {
+    return this.tickets.slice(0, this.limit);
+  }
+
+  get isMoreButtonShown() {
+    return this.renderedTickets.length < this.tickets.length
+  }
+
+  limit = 5
+
+  increaseLimit(): void {
+    console.log(`increasing limit...`)
+    this.limit += 5;
+    console.log(this.$refs.scroller)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    this.$refs.scroller.scrollToItem(this.limit);
+  }
+
+  mounted(): void {
+    console.log(this.renderedTickets);
+  }
 }
 </script>
 
 <style scoped>
 .ticket-list {
-  max-height: 100vh;
+  max-height: 70vh;
   overflow-y: auto;
 }
 </style>
