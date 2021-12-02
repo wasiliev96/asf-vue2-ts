@@ -1,5 +1,4 @@
-import {ACTION_TYPES, MUTATION_TYPES} from "@/store/types";
-import {LOAD_STATUS, StateType} from "@/store/state";
+import {ACTION_TYPES, LOAD_STATUS, MUTATION_TYPES, StateType} from "@/store/types";
 import {getSearchId, getTickets} from "@/services/AviaSalesService";
 
 type LoadTicketsPayloadType = {

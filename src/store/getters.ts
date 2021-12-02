@@ -1,5 +1,4 @@
-import {GETTER_TYPES, SORT_TYPE, SortType, Ticket} from "@/store/types";
-import {StateType} from "@/store/state";
+import {GETTER_TYPES, SORT_TYPE, SortType, StateType, Ticket} from "@/store/types";
 import {compareAsc, parseISO} from 'date-fns';
 
 const sortedTickets = (tickets: Ticket[], sortBy: SortType): Ticket[] => {
