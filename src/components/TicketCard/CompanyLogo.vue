@@ -27,7 +27,7 @@ import {getCompanyLogo} from "@/services/AviaSalesService";
 @Component({
   name: 'CompanyLogo'
 })
-export default class CompenyLogo extends Vue {
+export default class CompanyLogo extends Vue {
   @Prop({required: true})
   iata!: string
   showedBlock: 'image' | 'placeholder' = 'placeholder';

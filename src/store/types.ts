@@ -70,3 +70,22 @@ export enum MUTATION_TYPES {
     SET_SEARCH_ID = 'SET_SEARCH_ID',
     SET_LOAD_STATUS = 'SET_LOAD_STATUS',
 }
+
+export interface StateType {
+    tickets: Ticket[],
+    searchId: string,
+
+    loading: {
+        status: LoadStatus,
+        response?: any
+    }
+}
+
+export enum LOAD_STATUS {
+    PENDING = 'PENDING',
+    RESOLVE = 'RESOLVE',
+    REJECT = 'REJECT',
+}
+
+export type LoadStatus = LOAD_STATUS.REJECT | LOAD_STATUS.RESOLVE | LOAD_STATUS.PENDING;
+

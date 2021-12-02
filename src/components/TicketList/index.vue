@@ -59,18 +59,17 @@ export default class TicketList extends Vue {
   @Prop({required: true})
   tickets!: Ticket[]
 
-  get renderedTickets() {
+  get renderedTickets():Ticket[] {
     return this.tickets.slice(0, this.limit);
   }
 
-  get isMoreButtonShown() {
+  get isMoreButtonShown():boolean {
     return this.renderedTickets.length < this.tickets.length
   }
 
   limit = 5
 
   increaseLimit(): void {
-    console.log(`increasing limit...`)
     this.limit += 5;
     console.log(this.$refs.scroller)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

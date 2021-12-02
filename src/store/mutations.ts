@@ -1,9 +1,5 @@
-import {StateType, LoadStatus} from "@/store/state";
-import {FilterType, MUTATION_TYPES, Ticket} from "@/store/types";
+import {LoadStatus, MUTATION_TYPES, StateType, Ticket} from "@/store/types";
 
-type SetFiltersPayloadType = {
-    filters: FilterType[];
-}
 type SetTicketsPayloadType = {
     tickets: Ticket[]
 }
@@ -12,16 +8,13 @@ type SetLoadStatusType = {
     response?: any
 }
 export default {
-    [MUTATION_TYPES.SET_FILTERS]: (state: StateType, {filters}: SetFiltersPayloadType): void => {
-        state.filters = filters
-    },
     [MUTATION_TYPES.SET_TICKETS]: (state: StateType, {tickets}: SetTicketsPayloadType): void => {
         state.tickets = tickets.map(ticket => ({...ticket, id: tickets.indexOf(ticket)}))
     },
     [MUTATION_TYPES.SET_SEARCH_ID]: (state: StateType, {searchId}: { searchId: string }): void => {
         state.searchId = searchId;
     },
-    [MUTATION_TYPES.SET_LOAD_STATUS]: (state: StateType, {status, response}: SetLoadStatusType) => {
+    [MUTATION_TYPES.SET_LOAD_STATUS]: (state: StateType, {status, response}: SetLoadStatusType): void => {
         state.loading.status = status;
         state.loading.response = response;
 

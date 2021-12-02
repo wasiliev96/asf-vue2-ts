@@ -29,24 +29,12 @@ import RadioGroup from "@/components/RadioGroup/index.vue";
 import FilterBar from "@/components/FilterBar/index.vue";
 import PageHeader from "@/components/PageHeader/index.vue";
 import {Component, Vue, Watch} from "vue-property-decorator";
-import {ACTION_TYPES, GETTER_TYPES} from "@/store/types";
-import {LOAD_STATUS} from "@/store/state";
-
-enum SORT_TYPE {
-  speed = 'speed',
-  cheap = 'cheap',
-  optimal = 'optimal'
-}
-
-type SortType = SORT_TYPE.optimal | SORT_TYPE.cheap | SORT_TYPE.speed | null;
-
-interface FilterType {
-  title: string,
-  value: number,
-  active: boolean
-}
+import {ACTION_TYPES, GETTER_TYPES, LOAD_STATUS} from "@/store/types";
+import {FilterType, SORT_TYPE, SortType} from "@/types";
 
 type SortButtons = { title: string, value: SortType }[]
+
+
 @Component({
   name: 'App',
   components: {
@@ -94,7 +82,7 @@ export default class App extends Vue {
     return this.$store.getters[GETTER_TYPES.FILTERED_TICKETS](this.stopsFilter, this.sortBy);
   }
 
-  get ticketLoadingError() {
+  get ticketLoadingError(): boolean {
     return this.$store.state.loading.status === LOAD_STATUS.REJECT
   }
 
@@ -113,7 +101,7 @@ export default class App extends Vue {
     }
   }
 
-  mounted() {
+  mounted(): void {
     this.$store.dispatch(ACTION_TYPES.LOAD_TICKETS);
   }
 }

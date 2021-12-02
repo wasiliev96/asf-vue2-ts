@@ -15,11 +15,8 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
+import {SelectType} from "@/types";
 
-interface SelectType extends HTMLButtonElement {
-  title: string,
-  value: string
-}
 
 @Component({
   name: 'RadioGroup',
@@ -31,11 +28,11 @@ export default class RadioGroup extends Vue {
   value!: string
 
 
-  get groupValue() {
+  get groupValue(): string {
     return this.value
   }
 
-  set groupValue(value) {
+  set groupValue(value: string) {
     this.$emit('input', value);
   }
 }
